@@ -1,12 +1,3 @@
-//***************************************************************
-//Αυτό το αρχείο θα το χρησιμοποιήσετε
-//για να υλοποιήσετε την άσκηση 1Α της OpenGL
-//
-//ΑΜ:5203                       Όνομα: Γκόβαρης Χρήστος-Γρηγόριος
-//ΑΜ:5351                       Όνομα: Σπανού Μαρία
-//
-//***************************************************************
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -51,6 +42,7 @@ int maze[10][10] = {
 	{1,1,1,1,1,1,1,1,1,1},
 };
 
+
 bool isWall(float x, float y) {
 	// Convert the OpenGL coordinates to maze indices
 	// Offset x by +5 to match the maze grid's center
@@ -66,6 +58,7 @@ bool isWall(float x, float y) {
 	// Treat out-of-bound positions as walls
 	return true;  
 }
+
 
 void moveChar(float* x, float* y, GLfloat character_vertices[], GLFWwindow* window, GLuint vertexbuffer2) {
 	float new_x = *x;
@@ -157,8 +150,7 @@ void moveChar(float* x, float* y, GLfloat character_vertices[], GLFWwindow* wind
 }
 
 
-//******************
-// Η LoadShaders είναι black box για σας
+// LoadShaders is our black box for now
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 
 	// Create the shaders
@@ -297,16 +289,10 @@ int main(void)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	//***********************************************
-	// Οι shaders σας είναι οι 
-	// ProjectVertexShader.vertexshader
-	// ProjectFragmentShader.fragmentshader
 	GLuint programID = LoadShaders("ProjectVertexShader.vertexshader", "ProjectFragmentShader.fragmentshader");
 
-	//////////////////////////////////////////////////////////	
-	/**Το παρακάτω το αγνοείτε - είναι τοποθέτηση κάμερας ***/
+	// camera
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-	//////////////////////////////////////////////////////////
 
 	glm::mat4 Projection = glm::perspective(glm::radians(30.0f), 4.0f / 4.0f, 0.1f, 100.0f);
 	// Camera matrix
@@ -318,236 +304,229 @@ int main(void)
 
 	glm::mat4 Model = glm::mat4(1.0f);
 	glm::mat4 MVP = Projection * View * Model;
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//*******************************************************************************************************
-	/// Για βοήθεια το πρόγραμμα αναπαριστά ενα τυχαίο τρίγωνο - εσείς θα πρέπει να βάλετε κορυφές κατάλληλες 
-	//  για το δικό σας τρίγωνο.
-	//Στην άσκηση αυτή δουλεύετε στις 2 διαστάσεις x,y οπότε η z συνιστώσα θα ειναι πάντα 0.0f
-	//*******************************************************************************************************
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	static const GLfloat shape_1_buffer[] = {
-		// Triangle 1
+		// triangle 1
 		-5.0f , 5.0f,	-5.0f , 4.0f,	-4.0f , 4.0f,
-		// Triangle 2
+		// triangle 2
 		-4.0f , 4.0f,	-4.0f , 5.0f,	-5.0f , 5.0f,
-		//Triangle 3
+		// triangle 3
 		-4.0f , 5.0f,	-4.0f , 4.0f,	-3.0f , 4.0f,
-		//triangle 4
+		// triangle 4
 		-3.0f , 4.0f,	-4.0f , 5.0f,	-3.0f , 5.0f,
-		//triangle 5
+		// triangle 5
 		-3.0f , 5.0f,	-3.0f , 4.0f,	-2.0f , 4.0f,
-		//triangle 6
+		// triangle 6
 		-3.0f , 5.0f,	-2.0f , 5.0f,	-2.0f , 4.0f,
-		//triangle 7
+		// triangle 7
 		-2.0f , 5.0f,	-2.0f , 4.0f,	-1.0f , 4.0f,
-		//triangle 8
+		// triangle 8
 		-2.0f , 5.0f,	-1.0f , 4.0f,	-1.0f , 5.0f,
-		//triangle 9
+		// triangle 9
 		-1.0f , 5.0f,	-1.0f , 4.0f,	0.0f , 4.0f,
-		//triangle 10
+		// triangle 10
 		-1.0f , 5.0f,	0.0f , 4.0f,	0.0f , 5.0f,
-		//Triangle 11
+		// triangle 11
 		0.0f , 4.0f,	0.0f , 5.0f,	1.0f , 4.0f,
-		//triangle 12
+		// triangle 12
 		1.0f , 5.0f,	1.0f , 4.0f,	0.0f , 5.0f,
-		//triangle 13
+		// triangle 13
 		1.0f , 5.0f,	1.0f , 4.0f,	2.0f , 4.0f,
-		//triangle 14
+		// triangle 14
 		1.0f , 5.0f,	2.0f , 4.0f,	2.0f , 5.0f,
-		//triangle 15
+		// triangle 15
 		2.0f , 5.0f,	2.0f , 4.0f,	3.0f , 4.0f,
-		//triangle 16
+		// triangle 16
 		2.0f , 5.0f,	3.0f , 5.0f,	3.0f , 4.0f,
-		//triangle 17
+		// triangle 17
 		3.0f , 5.0f,	3.0f , 4.0f,	4.0f , 4.0f,
-		//triangle 18
+		// triangle 18
 		3.0f , 5.0f,	4.0f , 4.0f,	4.0f , 5.0f,
-		//Triangle 19
+		// triangle 19
 		4.0f , 5.0f,	4.0f , 4.0f,	5.0f , 4.0f,
-		//triangle 20
+		// triangle 20
 		4.0f , 5.0f,	5.0f , 4.0f,	5.0f , 5.0f,
-		//triangle 21
+		// triangle 21
 		-5.0f , 4.0f,	-5.0f , 3.0f,  	-4.0f , 3.0f,
-		//triangle 22
+		// triangle 22
 		-5.0f , 4.0f,	-4.0f , 4.0f,	-4.0f , 3.0f,
-		//triangle 23
+		// triangle 23
 		4.0f , 4.0f,	4.0f , 3.0f,	5.0f , 3.0f,
-		//triangle 24
+		// triangle 24
 		4.0f , 4.0f,	5.0f , 4.0f,	5.0f , 3.0f,
-		//triangle 25
+		// triangle 25
 		-3.0f , 3.0f,	-3.0f , 2.0f,	-2.0f , 2.0f,
-		//triangle 26
+		// triangle 26
 		-3.0f , 3.0f,	-2.0f , 3.0f,	-2.0f , 2.0f,
-		//triangle 27
+		// triangle 27
 		-2.0f , 3.0f,	-2.0f , 2.0f,	-1.0f , 2.0f,
-		//Triangle 28
+		// triangle 28
 		-2.0f , 3.0f,	-1.0f , 3.0f,	-1.0f , 2.0f,
-		//triangle 29
+		// triangle 29
 		0.0f , 2.0f,	-1.0f , 3.0f,	-1.0f , 2.0f,
-		//triangle 30
+		// triangle 30
 		0.0f , 2.0f,	-1.0f , 3.0f,	0.0f , 3.0f,
-		//triangle 31
+		// triangle 31
 		0.0f , 2.0f,	1.0f , 2.0f,	0.0f , 3.0f,
-		//triangle 32
+		// triangle 32
 		1.0f , 3.0f,	1.0f , 2.0f,	0.0f , 3.0f,
-		//triangle 33
+		// triangle 33
 		2.0f , 3.0f,	2.0f , 2.0f,	3.0f , 2.0f,
-		//triangle 34
+		// triangle 34
 		2.0f , 3.0f,	3.0f , 3.0f,	3.0f , 2.0f,
-		//triangle 35
+		// triangle 35
 		4.0f , 3.0f,	4.0f , 2.0f,	5.0f , 2.0f,
-		//Triangle 36
+		// triangle 36
 		4.0f , 3.0f,	5.0f , 3.0f,	5.0f , 2.0f,
-		//triangle 37
+		// triangle 37
 		-5.0f , 2.0f,	-5.0f , 1.0f,	-4.0f , 1.0f,
-		//triangle 38
+		// triangle 38
 		-5.0f , 2.0f,	-4.0f , 2.0f,	-4.0f , 1.0f,
-		//triangle 39
+		// triangle 39
 		-3.0f , 2.0f,	-3.0f , 1.0f,	-2.0f , 1.0f,
-		//triangle 40
+		// triangle 40
 		-3.0f , 2.0f,	-2.0f , 2.0f,	-2.0f , 1.0f,
-		//triangle 41
+		// triangle 41
 		2.0f , 2.0f,	2.0f , 1.0f,	3.0f , 1.0f,
-		//triangle 42
+		// triangle 42
 		2.0f , 2.0f,	3.0f , 2.0f,	3.0f , 1.0f,
-		//triangle 43
+		// triangle 43
 		4.0f , 2.0f,	4.0f , 1.0f,	5.0f , 1.0f,
-		//triangle 44
+		// triangle 44
 		4.0f , 2.0f,	5.0f , 2.0f,	5.0f , 1.0f,
-		//Triangle 45
+		// triangle 45
 		-5.0f , 1.0f,	-5.0f , 0.0f,	-4.0f , 0.0f,
-		//triangle 46
+		// triangle 46
 		-3.0f , 1.0f,	-3.0f , 0.0f,	-2.0f , 0.0f,
-		//triangle 47
+		// triangle 47
 		-3.0f , 1.0f,	-2.0f , 1.0f,	-2.0f , 0.0f,
-		//triangle 48
+		// triangle 48
 		-1.0f , 1.0f,	-1.0f , 0.0f,	0.0f , 0.0f,
-		//triangle 49
+		// triangle 49
 		-1.0f , 1.0f,	0.0f , 1.0f,	0.0f , 0.0f,
-		//triangle 50
+		// triangle 50
 		0.0f , 1.0f,	0.0f , 0.0f,	1.0f , 0.0f,
-		//triangle 51
+		// triangle 51
 		0.0f , 1.0f,	1.0f , 1.0f,	1.0f , 0.0f,
-		//triangle 52
+		// triangle 52
 		2.0f , 1.0f,	2.0f , 0.0f,	3.0f , 0.0f,
-		//Triangle 53
+		// triangle 53
 		2.0f , 1.0f,	3.0f , 1.0f,	3.0f , 0.0f,
-		//triangle 54
+		// triangle 54
 		4.0f , 1.0f,	4.0f , 0.0f,	5.0f , 0.0f,
-		//triangle 55
+		// triangle 55
 		4.0f , 1.0f,	5.0f , 1.0f,	5.0f , 0.0f,
-		//triangle 56
+		// triangle 56
 		-5.0f , 0.0f,	-5.0f , -1.0f,	-4.0f , -1.0f,
-		//triangle 57
+		// triangle 57
 		-5.0f , 0.0f,	-4.0f , 0.0f,	-4.0f , -1.0f,
-		//triangle 58
+		// triangle 58
 		0.0f , 0.0f,	0.0f , -1.0f,	1.0f , -1.0f,
-		//triangle 59
+		// triangle 59
 		0.0f , 0.0f,	1.0f , 0.0f,	1.0f , -1.0f,
-		//triangle 60
+		// triangle 60
 		4.0f , 0.0f,	4.0f , -1.0f,	5.0f , -1.0f,
-		//triangle 61
+		// triangle 61
 		4.0f , 0.0f,	5.0f , 0.0f,	5.0f , -1.0f,
-		//triangle 62
+		// triangle 62
 		-5.0f , 1.0f,	-4.0f , 1.0f,	-4.0f , 0.0f,
-		//Triangle 63
+		// triangle 63
 		-5.0f , -1.0f,	-5.0f , -2.0f,	-4.0f , -2.0f,
-		//triangle 64
+		// triangle 64
 		-5.0f , -1.0f,	-4.0f , -1.0f,	-4.0f , -2.0f,
-		//triangle 65
+		// triangle 65
 		-3.0f , -1.0f,	-3.0f , -2.0f,	-2.0f , -2.0f,
-		//triangle 66
+		// triangle 66
 		-3.0f , -1.0f,	-2.0f , -1.0f,	-2.0f , -2.0f,
-		//triangle 67
+		// triangle 67
 		-2.0f , -1.0f,	-2.0f , -2.0f,	-1.0f , -2.0f,
-		//triangle 68
+		// triangle 68
 		-2.0f , -1.0f,	-1.0f , -1.0f,	-1.0f , -2.0f,
-		//triangle 69
+		// triangle 69
 		0.0f , -1.0f,	0.0f , -2.0f,	1.0f , -2.0f,
-		//triangle 70
+		// triangle 70
 		0.0f , -1.0f,	1.0f , -1.0f,	1.0f , -2.0f,
-		//triangle 71
+		// triangle 71
 		1.0f , -1.0f,	1.0f , -2.0f,	2.0f , -2.0f,
-		//triangle 72
+		// triangle 72
 		1.0f , -1.0f,	2.0f , -1.0f,	2.0f , -2.0f,
-		//Triangle 73
+		// triangle 73
 		2.0f , -1.0f,	2.0f , -2.0f,	3.0f , -2.0f,
-		//triangle 74
+		// triangle 74
 		2.0f , -1.0f,	3.0f , -2.0f,	3.0f , -2.0f,
-		//triangle 75
+		// triangle 75
 		4.0f , -1.0f,	4.0f , -2.0f,	5.0f , -2.0f,
-		//triangle 76
+		// triangle 76
 		-5.0f , -2.0f,	-5.0f , -3.0f,	-4.0f , -3.0f,
-		//triangle 77
+		// triangle 77
 		2.0f , -2.0f,	2.0f , -3.0f,	3.0f , -3.0f,
-		//triangle 78
+		// triangle 78
 		2.0f , -2.0f,	3.0f , -2.0f,	3.0f , -3.0f,
-		//triangle 79
+		// triangle 79
 		-5.0f , -3.0f,	-5.0f , -4.0f,	-4.0f , -4.0f,
-		//triangle 80
+		// triangle 80
 		-5.0f , -3.0f,	-4.0f , -3.0f,	-4.0f , -4.0f,
-		//triangle 81
+		// triangle 81
 		-3.0f , -3.0f,	-3.0f , -4.0f,	-2.0f , -4.0f,
-		//triangle 82
+		// triangle 82
 		-3.0f , -3.0f,	-2.0f , -3.0f,	-2.0f , -4.0f,
-		//Triangle 83
+		// triangle 83
 		-1.0f , -3.0f,	-1.0f , -4.0f,	0.0f , -4.0f,
-		//triangle 84
+		// triangle 84
 		-1.0f , -3.0f,	0.0f , -3.0f,	0.0f , -4.0f,
-		//triangle 85
+		// triangle 85
 		0.0f , -3.0f,	0.0f , -4.0f,	1.0f , -4.0f,
-		//triangle 86
+		// triangle 86
 		0.0f , -3.0f,	1.0f , -3.0f,	1.0f , -4.0f,
-		//triangle 87
+		// triangle 87
 		4.0f , -3.0f,	4.0f , -4.0f,	5.0f , -4.0f,
-		//triangle 88
+		// triangle 88
 		4.0f , -3.0f,	5.0f , -3.0f,	5.0f , -4.0f,
-		//triangle 89
+		// triangle 89
 		2.0f , -1.0f,	3.0f , -1.0f,	3.0f , -2.0f,
-		//triangle 90
+		// triangle 90
 		4.0f , -1.0f,	5.0f , -1.0f,	5.0f , -2.0f,
-		//triangle 91
+		// triangle 91
 		-5.0f , -2.0f,	-4.0f , -2.0f,	-4.0f , -3.0f,
-		//triangle 92
+		// triangle 92
 		-5.0f , -4.0f,	-5.0f , -5.0f,	-4.0f , -5.0f,
-		//Triangle 93
+		// triangle 93
 		-5.0f , -4.0f,	-4.0f , -4.0f,	-4.0f , -5.0f,
-		//triangle 94
+		// triangle 94
 		-4.0f , -4.0f,	-4.0f , -5.0f,	-3.0f , -5.0f,
-		//triangle 95
+		// triangle 95
 		-4.0f , -4.0f,	-3.0f , -4.0f,	-3.0f , -5.0f,
-		//triangle 96
+		// triangle 96
 		-3.0f , -4.0f,	-3.0f , -5.0f,	-2.0f , -5.0f,
-		//triangle 97
+		// triangle 97
 		-3.0f , -4.0f,	-2.0f , -4.0f,	-2.0f , -5.0f,
-		//triangle 98
+		// triangle 98
 		-2.0f , -4.0f,	-2.0f , -5.0f,	-1.0f , -5.0f,
-		//triangle 99
+		// triangle 99
 		-2.0f , -4.0f,	-1.0f , -4.0f,	-1.0f , -5.0f,
-		//triangle 100
+		// triangle 100
 		-1.0f , -4.0f,	-1.0f , -5.0f,	0.0f , -5.0f,
-		//triangle 101
+		// triangle 101
 		-1.0f , -4.0f,	0.0f , -4.0f,	0.0f , -5.0f,
-		//triangle 102
+		// triangle 102
 		0.0f , -4.0f,	1.0f , -4.0f,	1.0f , -5.0f,
-		//Triangle 103
+		// triangle 103
 		1.0f , -4.0f,	1.0f , -5.0f,	2.0f , -5.0f,
-		//triangle 104
+		// triangle 104
 		1.0f , -4.0f,	2.0f , -4.0f,	2.0f , -5.0f,
-		//triangle 105
+		// triangle 105
 		2.0f , -4.0f,	2.0f , -5.0f,	3.0f , -5.0f,
-		//triangle 106
+		// triangle 106
 		2.0f , -4.0f,	3.0f , -4.0f,	3.0f , -5.0f,
-		//triangle 107
+		// triangle 107
 		3.0f , -4.0f,	3.0f , -5.0f,	4.0f , -5.0f,
-		//triangle 108
+		// triangle 108
 		3.0f , -4.0f,	4.0f , -4.0f,	4.0f , -5.0f,
-		//triangle 109
+		// triangle 109
 		4.0f , -4.0f,	4.0f , -5.0f,	5.0f , -5.0f,
-		//triangle 110
+		// triangle 110
 		4.0f , -4.0f,	5.0f , -4.0f,	5.0f , -5.0f,
-		//triangle 111
+		// extra triangle
 		0.0f , -4.0f,	0.0f , -5.0f,	1.0f , -5.0f
 	};
 
@@ -557,9 +536,9 @@ int main(void)
 	// Define the vertices for the smaller blue square (character A)
 	// Assuming the character A is initially at the center of the maze (0, 0)
 	GLfloat character_vertices[] = {
-		// Triangle 1
+		// triangle 1
 		x , (y + 0.5f),		x , y,		(x + 0.5f) , y,
-		// Triangle 2
+		// triangle 2
 		x , (y + 0.5f),  (x + 0.5f) , (y + 0.5f),		(x + 0.5f) , y
 	};
 
@@ -581,7 +560,7 @@ int main(void)
 		// Use our shader
 		glUseProgram(programID);
 
-		/// Αυτό αφορά την κάμερα - το αγνοείτε
+		/// camera
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);  
 
 
