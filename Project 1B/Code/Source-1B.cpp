@@ -286,7 +286,7 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
     }
 
 		// Update character vertices for the new 3D position
-		// Simple vertices for a 3D cube (8 vertices for a cube)
+		// Simple vertices for a 3D cube (36 vertices for a cube)
 		character_vertices[0] = *x;
 		character_vertices[1] = *y;
 		character_vertices[2] = *z;
