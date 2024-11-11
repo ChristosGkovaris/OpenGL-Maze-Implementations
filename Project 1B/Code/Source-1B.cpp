@@ -172,8 +172,8 @@ void camera_function() {
 
     // Define the camera's position, target point, and up direction
     glm::vec3 cameraPos = glm::vec3(cameraX, cameraY, cameraZ);
-    glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f);   // Camera looks toward the origin
-    glm::vec3 up = glm::vec3(0.0f, 0.0f, 1.0f);       // Up direction of the camera
+    glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.25f);   // Camera looks toward the origin
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);        // Up direction of the camera
 
     // Create the view matrix based on the camera's position, target, and up vector
     ViewMatrix = glm::lookAt(cameraPos, target, up);
