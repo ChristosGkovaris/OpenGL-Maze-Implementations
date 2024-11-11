@@ -37,6 +37,7 @@ glm::mat4 getProjectionMatrix() {
     return ProjectionMatrix;
 }
 
+
 // Boolean flags to track key press states for navigation and zoom
 bool rightKeyPressed = false;     // Move camera or object to the right
 bool leftKeyPressed = false;      // Move camera or object to the left
@@ -74,7 +75,15 @@ float pitch = 0.0f;               // Rotation angle around the X-axis (up and do
 float yaw = 0.0f;                 // Rotation angle around the Y-axis (left and right rotation)
 
 // Function to handle camera movements and rotations based on key inputs
-void camera_function(GLFWwindow* window, glm::mat4& View) {
+void camera_function() {
+    static bool initialized = false;
+    	if (!initialized) {
+        	cameraDistance = 20.0f;
+                pitch = 0.0f;
+                yaw = 0.0f;
+                initialized = true;
+        }
+	
     // Control pitch (up and down rotation) around the X-axis
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         if (!leftofXKeyPressed) {
@@ -167,7 +176,7 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
     glm::vec3 up = glm::vec3(0.0f, 0.0f, 1.0f);       // Up direction of the camera
 
     // Create the view matrix based on the camera's position, target, and up vector
-    View = glm::lookAt(cameraPos, target, up);
+    ViewMatrix = glm::lookAt(cameraPos, target, up);
 }
 
 
@@ -854,7 +863,7 @@ int main(void)
 
 	GLfloat r2 = 1.0f;
 	GLfloat g2 = 1.0f;
-	GLfloat b2 = 0.0f;
+	GLfloat b2 = -0.25f;
 
 	static const GLfloat colorChar[] = {
 		r2,  g2,  b2,a,	r2,  g2,  b2,a,	r2,  g2,  b2,a,	r2,  g2,  b2,a,	r2,  g2,  b2,a,	r2,  g2,  b2,a,
@@ -920,18 +929,20 @@ int main(void)
 		// Use the compiled shader program
 		glUseProgram(programID);
 
-		// Define the projection matrix (perspective projection with 45 degree field of view)
-		glm::mat4 Projection = glm::perspective(glm::radians(260.0f), 4.0f / 4.0f, 0.1f, 100.0f);
-
-		// Identity matrix for model
-		glm::mat4 Model = glm::mat4(1.0f); 
-
 		// Update camera position/view
-		camera_function(window, View);
+		camera_function();
 
+		// Define the projection matrix (perspective projection with 45 degree field of view)
+		glm::mat4 ProjectionMatrix = getProjectionMatrix();
+		
+		glm::mat4 ViewMatrix = getViewMatrix();
+		
+		// Identity matrix for model
+		glm::mat4 ModelMatrix = glm::mat4(1.0f);
+		
 		// Multiply MVP matrices
-		glm::mat4 MVP = Projection * View * Model; 
-
+		glm::mat4 MVP = Projection * ViewMatrix * ModelMatrix;
+		
 		// Update the shader with the new MVP matrix
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
