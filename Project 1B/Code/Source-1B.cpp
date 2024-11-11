@@ -69,7 +69,7 @@ int maze[10][10] = {
 };
 
 // Camera control variables
-float cameraDistance = 5.0f;      // Controls the distance of the camera from the origin
+float cameraDistance = 20.0f;     // Controls the distance of the camera from the origin
 float pitch = 0.0f;               // Rotation angle around the X-axis (up and down rotation)
 float yaw = 0.0f;                 // Rotation angle around the Y-axis (left and right rotation)
 
@@ -80,12 +80,12 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!leftofXKeyPressed) {
             std::cout << "Left of x key pressed\n";
             // Rotate upward
-			pitch += 0.1f;    
-			// Set flag to true to prevent repeated actions   
+	    pitch += 0.1f;    
+	    // Set flag to true to prevent repeated actions   
             leftofXKeyPressed = true;  
         }
     } else {
-		// Reset flag when key is released
+	// Reset flag when key is released
         leftofXKeyPressed = false;  
     }
 
@@ -93,7 +93,8 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!rightofXKeyPressed) {
             std::cout << "Right of x key pressed\n";
             // Rotate downward
-			pitch -= 0.1f;       
+	    pitch -= 0.1f;    
+	    // Set flag to true to prevent repeated actions
             rightofXKeyPressed = true;
         }
     } else {
@@ -105,7 +106,8 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!leftofYKeyPressed) {
             std::cout << "Left of y key pressed\n";
             // Rotate to the left
-			yaw += 0.1f;         
+	    yaw += 0.1f;
+	    // Set flag to true to prevent repeated actions
             leftofYKeyPressed = true;
         }
     } else {
@@ -116,7 +118,8 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!rightofYKeyPressed) {
             std::cout << "Right key pressed\n";
             // Rotate to the right
-			yaw -= 0.1f;         
+	    yaw -= 0.1f;   
+	    // Set flag to true to prevent repeated actions
             rightofYKeyPressed = true;
         }
     } else {
@@ -128,10 +131,11 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!zoomInKeyPressed) {
             std::cout << "Zoom in key pressed\n";
             // Decrease distance to zoom in
-			cameraDistance -= 0.1f;   
-			// Minimum zoom limit
+	    cameraDistance -= 0.1f;   
+	    // Minimum zoom limit
             if (cameraDistance < 1.0f) cameraDistance = 1.0f; 
-            zoomInKeyPressed = true;
+            // Set flag to true to prevent repeated actions
+	    zoomInKeyPressed = true;
         }
     } else {
         zoomInKeyPressed = false;
@@ -142,10 +146,11 @@ void camera_function(GLFWwindow* window, glm::mat4& View) {
         if (!zoomOutKeyPressed) {
             std::cout << "Zoom out key pressed\n";
             // Increase distance to zoom out
-			cameraDistance += 0.1f;   
-			// Maximum zoom limit
+	    cameraDistance += 0.1f;   
+	    // Maximum zoom limit
             if (cameraDistance > 20.0f) cameraDistance = 20.0f; 
-            zoomOutKeyPressed = true;
+            // Set flag to true to prevent repeated actions
+	    zoomOutKeyPressed = true;
         }
     } else {
         zoomOutKeyPressed = false;
@@ -200,8 +205,8 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
     // Move right when 'L' key is pressed
     if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
         // Only act if key wasn’t pressed previously
-		if (!rightKeyPressed) {  
-			// If at exit, move to start
+	if (!rightKeyPressed) {  
+	    // If at exit, move to start
             if (new_x == end_x && new_y == end_y) {  
                 std::cout << "Right key pressed\n";
                 new_x = start_x;
@@ -209,29 +214,29 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
             } else {
                 std::cout << "Right key pressed\n";
                 // Move one unit right
-				new_x += 1.0f;  
+		new_x += 1.0f;  
             }
-			// Set flag to indicate key press
+	    // Set flag to indicate key press
             rightKeyPressed = true;  
         }
     } else {
-		// Reset flag when key is released
+	// Reset flag when key is released
         rightKeyPressed = false;  
     }
 
     // Move left when 'J' key is pressed
     if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) {
         if (!leftKeyPressed) {
-			// If at start, move to exit
+	    // If at start, move to exit
             if (new_x == start_x && new_y == start_y) {  
                 std::cout << "Left key pressed\n";
                 new_x = end_x;
                 new_y = end_y;
-			// Boundary check to prevent moving out of bounds
+	    // Boundary check to prevent moving out of bounds
             } else if (*x > -4.75f) {  
                 std::cout << "Left key pressed\n";
                 // Move one unit left
-				new_x -= 1.0f;  
+		new_x -= 1.0f;  
             }
             leftKeyPressed = true;
         }
@@ -244,7 +249,7 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
         if (!downKeyPressed) {
             std::cout << "Down key pressed\n";
             // Move one unit down
-			new_y -= 1.0f;  
+	    new_y -= 1.0f;  
             downKeyPressed = true;
         }
     } else {
@@ -256,7 +261,7 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
         if (!upKeyPressed) {
             std::cout << "Up key pressed\n";
             // Move one unit up
-			new_y += 1.0f;  
+	    new_y += 1.0f;  
             upKeyPressed = true;
         }
     } else {
@@ -560,7 +565,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(800, 800, u8"ΑΣΚΗΣΗ 1Β - 2024", NULL, NULL);
+    window = glfwCreateWindow(950, 950, u8"ΑΣΚΗΣΗ 1Β - 2024", NULL, NULL);
     if (window == NULL) {
         fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
         getchar();
@@ -572,7 +577,7 @@ int main(void)
     glfwMakeContextCurrent(window);
 
     // Initialize GLEW (extension wrangler for OpenGL)
-	// Enable experimental extensions
+    // Enable experimental extensions
     glewExperimental = true; 
     if (glewInit() != GLEW_OK) {
         fprintf(stderr, "Failed to initialize GLEW\n");
@@ -586,7 +591,7 @@ int main(void)
 
     // Set background color to black
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	// Enable depth testing
+    // Enable depth testing
     glEnable(GL_DEPTH_TEST); 
 
     // Generate and bind a vertex array object (VAO)
