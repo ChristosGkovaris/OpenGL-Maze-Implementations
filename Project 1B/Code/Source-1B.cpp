@@ -88,22 +88,26 @@ void camera_function() {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         if (!leftofXKeyPressed) {
             std::cout << "Left of x key pressed\n";
-            // Rotate upward
-	    pitch += 0.1f;    
-	    // Set flag to true to prevent repeated actions   
+            
+			// Rotate upward
+			pitch += 0.1f;    
+			
+			// Set flag to true to prevent repeated actions   
             leftofXKeyPressed = true;  
         }
     } else {
-	// Reset flag when key is released
+		// Reset flag when key is released
         leftofXKeyPressed = false;  
     }
 
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
         if (!rightofXKeyPressed) {
             std::cout << "Right of x key pressed\n";
-            // Rotate downward
-	    pitch -= 0.1f;    
-	    // Set flag to true to prevent repeated actions
+            
+			// Rotate downward
+			pitch -= 0.1f;    
+			
+			// Set flag to true to prevent repeated actions
             rightofXKeyPressed = true;
         }
     } else {
@@ -114,9 +118,11 @@ void camera_function() {
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
         if (!leftofYKeyPressed) {
             std::cout << "Left of y key pressed\n";
+
             // Rotate to the left
-	    yaw += 0.1f;
-	    // Set flag to true to prevent repeated actions
+			yaw += 0.1f;
+
+			// Set flag to true to prevent repeated actions
             leftofYKeyPressed = true;
         }
     } else {
@@ -126,9 +132,11 @@ void camera_function() {
     if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
         if (!rightofYKeyPressed) {
             std::cout << "Right key pressed\n";
-            // Rotate to the right
-	    yaw -= 0.1f;   
-	    // Set flag to true to prevent repeated actions
+            
+			// Rotate to the right
+			yaw -= 0.1f;   
+			
+			// Set flag to true to prevent repeated actions
             rightofYKeyPressed = true;
         }
     } else {
@@ -139,12 +147,15 @@ void camera_function() {
     if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS) {
         if (!zoomInKeyPressed) {
             std::cout << "Zoom in key pressed\n";
-            // Decrease distance to zoom in
-	    cameraDistance -= 0.1f;   
-	    // Minimum zoom limit
+            
+			// Decrease distance to zoom in
+			cameraDistance -= 0.1f;   
+			
+			// Minimum zoom limit
             if (cameraDistance < 1.0f) cameraDistance = 1.0f; 
-            // Set flag to true to prevent repeated actions
-	    zoomInKeyPressed = true;
+            
+			// Set flag to true to prevent repeated actions
+			zoomInKeyPressed = true;
         }
     } else {
         zoomInKeyPressed = false;
@@ -154,12 +165,15 @@ void camera_function() {
     if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS) {
         if (!zoomOutKeyPressed) {
             std::cout << "Zoom out key pressed\n";
-            // Increase distance to zoom out
-	    cameraDistance += 0.1f;   
-	    // Maximum zoom limit
+            
+			// Increase distance to zoom out
+			cameraDistance += 0.1f;   
+			
+			// Maximum zoom limit
             if (cameraDistance > 20.0f) cameraDistance = 20.0f; 
-            // Set flag to true to prevent repeated actions
-	    zoomOutKeyPressed = true;
+			
+			// Set flag to true to prevent repeated actions
+			zoomOutKeyPressed = true;
         }
     } else {
         zoomOutKeyPressed = false;
@@ -172,8 +186,8 @@ void camera_function() {
 
     // Define the camera's position, target point, and up direction
     glm::vec3 cameraPos = glm::vec3(cameraX, cameraY, cameraZ);
-    glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.25f);   // Camera looks toward the origin
-    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);        // Up direction of the camera
+    glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.25f);  // Camera looks toward the origin
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);       // Up direction of the camera
 
     // Create the view matrix based on the camera's position, target, and up vector
     ViewMatrix = glm::lookAt(cameraPos, target, up);
@@ -213,43 +227,52 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
 
     // Move right when 'L' key is pressed
     if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
-        // Only act if key wasn’t pressed previously
-	if (!rightKeyPressed) {  
-	    // If at exit, move to start
-            if (new_x == end_x && new_y == end_y) {  
-                std::cout << "Right key pressed\n";
-                new_x = start_x;
-                new_y = start_y;
-            } else {
-                std::cout << "Right key pressed\n";
-                // Move one unit right
-		new_x += 1.0f;  
-            }
-	    // Set flag to indicate key press
-            rightKeyPressed = true;  
-        }
+    
+		// Only act if key wasn’t pressed previously
+		if (!rightKeyPressed) {  
+			// If at exit, move to start
+			if (new_x == end_x && new_y == end_y) {  
+				std::cout << "Right key pressed\n";
+				new_x = start_x;
+				new_y = start_y;
+			} else {
+				std::cout << "Right key pressed\n";
+        
+				// Move one unit right
+				new_x += 1.0f;  
+			}
+			
+			// Set flag to indicate key press
+			rightKeyPressed = true;  
+		}
+
     } else {
-	// Reset flag when key is released
+		// Reset flag when key is released
         rightKeyPressed = false;  
     }
 
     // Move left when 'J' key is pressed
     if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) {
         if (!leftKeyPressed) {
-	    // If at start, move to exit
+			
+			// If at start, move to exit
             if (new_x == start_x && new_y == start_y) {  
                 std::cout << "Left key pressed\n";
                 new_x = end_x;
                 new_y = end_y;
-	    // Boundary check to prevent moving out of bounds
+				
+			// Boundary check to prevent moving out of bounds
             } else if (*x > -4.75f) {  
                 std::cout << "Left key pressed\n";
-                // Move one unit left
-		new_x -= 1.0f;  
+                
+				// Move one unit left
+				new_x -= 1.0f;  
             }
-            leftKeyPressed = true;
+            
+			leftKeyPressed = true;
         }
-    } else {
+	
+	} else {
         leftKeyPressed = false;
     }
 
@@ -257,11 +280,13 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
     if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
         if (!downKeyPressed) {
             std::cout << "Down key pressed\n";
-            // Move one unit down
-	    new_y -= 1.0f;  
+            
+			// Move one unit down
+			new_y -= 1.0f;  
             downKeyPressed = true;
         }
-    } else {
+    
+	} else {
         downKeyPressed = false;
     }
 
@@ -269,8 +294,9 @@ void moveChar(float* x, float* y, float* z, GLfloat character_vertices[], GLFWwi
     if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
         if (!upKeyPressed) {
             std::cout << "Up key pressed\n";
-            // Move one unit up
-	    new_y += 1.0f;  
+            
+			// Move one unit up
+			new_y += 1.0f;  
             upKeyPressed = true;
         }
     } else {
