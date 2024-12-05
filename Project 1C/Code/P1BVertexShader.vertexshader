@@ -1,15 +1,28 @@
 #version 330 core
 
-layout(location = 0) in vec3 vertexPosition_modelspace;
-layout(location = 1) in vec4 vertexColor;
+layout(location = 0) in vec3 vertexPosition_modelspace;    // Position
+layout(location = 1) in vec4 vertexColor;                  // Color from colorbuffer
+layout(location = 2) in vec2 vertexUV;                     // UV coordinates
 
-out vec4 fragmentColor;
+out vec4 fragmentColor; // Color to fragment shader
+out vec2 UV;            // UV coordinates for texture
 
-uniform mat4 MVP;
+uniform mat4 MVP;       // Transformation
+//uniform mat4 model;   // Model matrix
 
-void main()
-{
-	gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
-	fragmentColor = vertexColor;
+//out vec3 fragPosition;
+//out vec3 normal;
+
+void main() {
+    // Position calculation
+    gl_Position = MVP * vec4(vertexPosition_modelspace, 1); 
+
+    // Color extraction
+    fragmentColor = vertexColor;
+
+    // Export UV coordinates 
+    UV = vertexUV;              
+
+    //fragPosition = vec3(model * vec4(vertexPosition_modelspace, 1.0)); 
+    //normal = mat3(transpose(inverse(model))) * vertexNormal;
 }
-

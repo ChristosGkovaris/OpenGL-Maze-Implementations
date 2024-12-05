@@ -1,10 +1,74 @@
 #version 330 core
-in vec4 fragmentColor;
 
-out vec4 color;
+in vec4 fragmentColor;  // Color from vertex shader
+in vec2 UV;             // UV coordinates for the texture
 
-void main()
-{
-	color = fragmentColor;
- 
+/*////////////////////////////////////////////////////////////////
+in vec3 fragPosition;   // Location of the fragment in the world
+in vec3 normal;         // Normal of fragment
+////////////////////////////////////////////////////////////////*/
+
+// Final pixel color
+out vec4 color;        
+
+uniform sampler2D texture1;  // Sampler for first texture
+uniform sampler2D texture2;  // Sampler for second texture
+uniform sampler2D texture3;  // Sampler for third texture
+
+uniform int activeTexture;   // Which texture to use (1, 2, 3)
+uniform int useTexture;      // Usage of texture or not
+uniform float glowIntensity; // Glow effect intensity (0.0 to 1.0)
+
+/*////////////////////////////////////////////////////////////
+uniform vec3 lightPosition;  // Light Position
+uniform vec3 lightColor;     // Light Color
+uniform vec3 viewPosition;   // Camera/observer position
+uniform vec3 objectColor;    // Color of object
+///////////////////////////////////////////////////////////*/
+
+void main() {
+    vec4 baseColor;
+    if (useTexture == 1) {
+        if (activeTexture == 1) {
+            baseColor = texture(texture1, UV).rgba;
+        } else if (activeTexture == 2) {
+            baseColor = texture(texture2, UV).rgba;
+        } else if (activeTexture == 3) {
+            baseColor = texture(texture3, UV).rgba;
+        } else {
+            // Default red if something wrong
+            baseColor = vec4(1.0, 0.0, 0.0, 1.0); 
+        }
+    } else {
+        baseColor = fragmentColor;
+    }
+
+
+    /*// Phong light calculation
+    vec3 norm = normalize(normal);
+    vec3 lightDir = normalize(lightPosition - fragPosition);
+    vec3 viewDir = normalize(viewPosition - fragPosition);
+    vec3 reflectDir = reflect(-lightDir, norm);
+
+    // Ambient
+    vec3 ambient = 0.2 * lightColor;
+
+    // Diffuse
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightColor * 1.5;
+
+    // Specular
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
+    vec3 specular = spec * lightColor * 1.2;
+
+    // Phong
+    vec4 phongColor = (ambient + diffuse + specular) * baseColor.rgb;*/
+
+   // Glow Effect
+    vec3 glowEffect = glowIntensity * vec3(0.0, 1.0, 0.0); // Green
+    color = vec4(baseColor.rgb + glowEffect, baseColor.a);
+
+    /* // 
+    vec3 finalColor = phongColor + glowEffect;
+    color = vec4(finalColor, baseColor.a);*/
 }
