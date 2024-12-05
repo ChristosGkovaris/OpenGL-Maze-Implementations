@@ -69,10 +69,12 @@ int maze[10][10] = {
     {1,1,1,1,1,1,1,1,1,1}
 };
 
+
 // Camera control variables
 float cameraDistance = 20.0f;     // Controls the distance of the camera from the origin
 float pitch = 0.0f;               // Rotation angle around the X-axis (up and down rotation)
 float yaw = 0.0f;                 // Rotation angle around the Y-axis (left and right rotation)
+
 
 // Function to handle camera movements and rotations based on key inputs
 void camera_function() {
