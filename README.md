@@ -1,5 +1,4 @@
 # Computer Graphics Projects
-
 Welcome to the "Computer Graphics Projects", an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
 
 
