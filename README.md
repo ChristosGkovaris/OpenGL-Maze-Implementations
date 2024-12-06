@@ -1,5 +1,5 @@
 # Computer Graphics Projects
-Welcome to the "Computer Graphics Projects", an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
+Welcome to the "Computer Graphics Projects" repository, an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
 
 
 ## Project Overview
@@ -33,17 +33,16 @@ The three projects (1A, 1B and 1C) are a graphical application that simulates a 
 
 
 ## Implementation Details
-**Technologies Used**
 - Programming Language: C++
 - Graphics Library: OpenGL (GLFW and GLEW)
 - Development Environment: Visual Studio 2022 (x64) on Windows 11 Home
 
 
-## How to Run the Application
+## How to Run
 - Clone the repository:
-   ```bash
-   git clone https://github.com/ChristosGkovaris/Computer-Graphics-Projects.git
-   cd Computer-Graphics-Projects
+  ```bash
+     git clone https://github.com/ChristosGkovaris/Computer-Graphics-Projects.git
+     cd Computer-Graphics-Projects
 
 
 ## Collaboration
