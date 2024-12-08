@@ -1,5 +1,5 @@
-# Computer Graphics Projects
-Welcome to the "Computer Graphics Projects" repository, an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
+# OpenGL Maze Implementations
+Welcome to the "OpenGL Maze Implementations" repository, an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
 
 
 ## Project Overview
@@ -41,8 +41,8 @@ The three projects (1A, 1B and 1C) are a graphical application that simulates a 
 ## How to Run
 - Clone the repository:
   ```bash
-     git clone https://github.com/ChristosGkovaris/Computer-Graphics-Projects.git
-     cd Computer-Graphics-Projects
+     git clone https://github.com/ChristosGkovaris/OpenGL-Maze-Implementations.git
+     cd OpenGL-Maze-Implementations
 
 
 ## Collaboration
