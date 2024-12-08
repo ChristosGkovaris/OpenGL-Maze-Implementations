@@ -1,5 +1,5 @@
 # OpenGL Maze Implementations
-Welcome to the "OpenGL Maze Implementations" repository, an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project is  out of .
+Welcome to the "OpenGL Maze Implementations" repository, an interactive application designed for learning and exploring fundamental concepts in computer graphics using OpenGL. This project was implemented during the seventh semester, in the course MYY702 of the curriculum of the University of Ioannina. The final grade of the project 1A is  out of , of 1B is  out of  and 1C is  out of .
 
 
 ## Project Overview
